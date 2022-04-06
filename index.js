@@ -50,6 +50,12 @@ module.exports = function(out, options) {
       fileList.push(filePath);
     }
 
+    if(options.extraStrings && Array.isArray(options.extraStrings) && options.extraStrings.length > 0) {
+      options.extraStrings.forEach(string => {
+        fileList.push(string);
+      });
+    }
+
     cb();
   }, function(cb) {    
     var buffer;
