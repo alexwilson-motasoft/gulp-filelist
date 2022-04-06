@@ -139,4 +139,37 @@ Outputs:
   "lame: directory/lame"
 ]
 ```
+
+usage with formatter function that returns objects
+
+```
+function formatter(filePath) {
+  
+  const src = filePath;
+  const isAwesome = filePath.includes("awesome");
+
+  return {
+    src: src,
+    isAwesome: isAwesome
+  };
+}
+
+gulp
+  .src(['directory/awesome.file', 'directory/lame.file'])
+  .pipe(require('gulp-filelist')('filelist.json', { destRowTemplate: formatter }))
+  .pipe(gulp.dest('out'))
+```
+Outputs:
+```
+[
+  {
+    "src": "directory/awesome",
+    "isAwesome": true
+  },
+  { 
+    "src": directory/lame",
+    "isAwesome": false
+  }
+]
+```
 ## [MIT Licensed](LICENSE)
